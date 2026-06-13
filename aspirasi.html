@@ -25,6 +25,18 @@
     color:#666;
     margin-top:10px;
 }
+
+.search-box{
+    margin-bottom:30px;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+}
     
 #aspirasiList{
     display:flex;
@@ -84,6 +96,15 @@
     </p>
 </div>
 
+    <div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Cari aspirasi...">
+
+</div>
+    
 <div id="aspirasiList">
 
 </div>
@@ -122,7 +143,63 @@ await getDocs(collection(db, "aspirasi"));
 const list =
 document.getElementById("aspirasiList");
 
+let semuaAspirasi = [];
+
 snapshot.forEach((doc) => {
+
+    semuaAspirasi.push(doc.data());
+
+});
+
+tampilkanAspirasi(semuaAspirasi);
+
+    function tampilkanAspirasi(dataAspirasi){
+
+    const list =
+    document.getElementById("aspirasiList");
+
+    list.innerHTML = "";
+
+    dataAspirasi.forEach((data)=>{
+
+        list.innerHTML += `
+
+        <div class="aspirasi-card">
+
+            <div class="badge ${data.kategori.toLowerCase()}">
+                ${data.kategori}
+            </div>
+
+            <h2>${data.judul}</h2>
+
+            <p>${data.isi}</p>
+
+            <div class="meta">
+
+                👤 ${data.username}
+
+                <br>
+
+                📍 ${data.kabupaten || "-"},
+                ${data.provinsi || "-"}
+
+                <br>
+
+                🏷️ ${data.topik || "-"}
+
+                <br>
+
+                📅 ${data.tanggal || "-"}
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
 
 const data = doc.data();
 
@@ -163,6 +240,28 @@ ${data.provinsi || "-"}
 
 });
 
+    document
+.getElementById("searchInput")
+.addEventListener("input", (e)=>{
+
+    const keyword =
+    e.target.value.toLowerCase();
+
+    const hasil =
+    semuaAspirasi.filter(item =>
+
+        item.judul?.toLowerCase().includes(keyword) ||
+
+        item.isi?.toLowerCase().includes(keyword) ||
+
+        item.topik?.toLowerCase().includes(keyword)
+
+    );
+
+    tampilkanAspirasi(hasil);
+
+});
+    
 </script>
   
 </body>
