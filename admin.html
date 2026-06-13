@@ -48,12 +48,13 @@ button{
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 
 import {
-  getFirestore,
-  collection,
-  getDocs,
-  doc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where
+}
+from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 import {
   getAuth,
@@ -83,9 +84,12 @@ onAuthStateChanged(auth, (user)=>{
     
 const list =
 document.getElementById("listAspirasi");
+const q = query(
+    collection(db, "aspirasi"),
+    where("status", "==", "published")
+);
 
-const snapshot =
-await getDocs(collection(db,"aspirasi"));
+const snapshot = await getDocs(q);
 
 snapshot.forEach((item)=>{
 
