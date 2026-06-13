@@ -72,20 +72,24 @@ header p{
     flex-wrap:wrap;
     justify-content:center;
 }
+
 .navbar{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     max-width:1200px;
     margin:auto;
-
     padding:20px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
 }
 
 .menu{
     display:flex;
-    gap:15px;
+    gap:20px;
 }
 
 .menu a{
@@ -94,10 +98,10 @@ header p{
     font-weight:600;
 }
 
-.menu a:hover{
-    opacity:.8;
+.hero-content{
+    text-align:center;
+    padding:70px 20px 100px;
 }
-
 
 .card{
     background:white;
