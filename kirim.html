@@ -249,6 +249,8 @@ document
         topik: document.getElementById("topik").value,
         judul: document.getElementById("judul").value,
         isi: document.getElementById("isi").value,
+        tanggal: new Date().toLocaleDateString("id-ID"),
+        
         status: "pending",
         createdAt: serverTimestamp()
       }
