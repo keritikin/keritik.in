@@ -147,7 +147,11 @@ let semuaAspirasi = [];
 
 snapshot.forEach((doc) => {
 
-    semuaAspirasi.push(doc.data());
+    const data = doc.data();
+
+    if (data.status === "published") {
+        semuaAspirasi.push(data);
+    }
 
 });
 
