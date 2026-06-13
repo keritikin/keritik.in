@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Admin | Keritik.in</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+.box{
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    width:350px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+input,button{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+}
+button{
+    background:#c62828;
+    color:white;
+    border:none;
+    border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>🔐 Login Admin</h2>
+
+    <input id="email" type="email" placeholder="Email admin">
+    <input id="password" type="password" placeholder="Password">
+
+    <button id="loginBtn">Masuk</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCRdkMGgb1s5n90FwMmDSL9WyHWPJeOMJ0",
+  authDomain: "keritik-in.firebaseapp.com",
+  projectId: "keritik-in",
+  storageBucket: "keritik-in.firebasestorage.app",
+  messagingSenderId: "428678412439",
+  appId: "1:428678412439:web:3daaf22b775b9b00a191d2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user)=>{
+    if(!user){
+        window.location.href = "login.html";
+    }
+});
+
+document.getElementById("loginBtn").addEventListener("click", async()=>{
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try{
+        await signInWithEmailAndPassword(auth,email,password);
+        window.location.href = "admin.html";
+    }catch(error){
+        alert("Login gagal. Cek email atau password.");
+    }
+});
+</script>
+
+</body>
+</html>
