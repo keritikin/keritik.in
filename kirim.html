@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kirim Aspirasi | Keritik.in</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.form-container{
+    max-width:800px;
+    margin:60px auto;
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+
+.form-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+}
+
+textarea{
+    min-height:180px;
+}
+
+.submit-btn{
+    width:100%;
+    background:#c62828;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    opacity:.9;
+}
+
+.notice{
+    background:#fff3cd;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <div class="form-title">
+        <h1>📝 Kirim Aspirasi</h1>
+        <p>Sampaikan kritik, saran, atau apresiasi Anda.</p>
+    </div>
+
+    <div class="notice">
+        Aspirasi akan ditinjau sebelum dipublikasikan.
+    </div>
+
+    <form>
+
+        <div class="form-group">
+            <label>Nama Pengguna (Opsional)</label>
+            <input type="text" placeholder="Contoh: rakyatbiasa">
+        </div>
+
+        <div class="form-group">
+            <label>Provinsi</label>
+
+            <select>
+                <option>Pilih Provinsi</option>
+                <option>DKI Jakarta</option>
+                <option>Jawa Barat</option>
+                <option>Jawa Tengah</option>
+                <option>Jawa Timur</option>
+                <option>Banten</option>
+                <option>DIY Yogyakarta</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Kategori</label>
+
+            <select>
+                <option>Kritik</option>
+                <option>Saran</option>
+                <option>Apresiasi</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Judul Aspirasi</label>
+            <input type="text">
+        </div>
+
+        <div class="form-group">
+            <label>Isi Aspirasi</label>
+            <textarea></textarea>
+        </div>
+
+        <button class="submit-btn">
+            Kirim Aspirasi
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
