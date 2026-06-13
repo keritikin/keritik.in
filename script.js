@@ -49,3 +49,43 @@ document.getElementById("totalAspirasi").textContent = total;
 document.getElementById("totalKritik").textContent = kritik;
 document.getElementById("totalSaran").textContent = saran;
 document.getElementById("totalApresiasi").textContent = apresiasi;
+
+const latestContainer = document.getElementById("latestAspirasi");
+
+let aspirasiTerbaru = [];
+
+snapshot.forEach((doc)=>{
+
+    const data = doc.data();
+
+    if(data.status === "published"){
+        aspirasiTerbaru.push(data);
+    }
+
+});
+
+aspirasiTerbaru
+.slice(0,3)
+.forEach((data)=>{
+
+    latestContainer.innerHTML += `
+
+    <div class="latest-card">
+
+        <div class="badge">
+            ${data.kategori}
+        </div>
+
+        <h3>
+            ${data.judul}
+        </h3>
+
+        <p>
+            ${data.isi.substring(0,120)}...
+        </p>
+
+    </div>
+
+    `;
+
+});
