@@ -140,9 +140,6 @@ const db = getFirestore(app);
 const snapshot =
 await getDocs(collection(db, "aspirasi"));
 
-const list =
-document.getElementById("aspirasiList");
-
 let semuaAspirasi = [];
 
 snapshot.forEach((doc) => {
