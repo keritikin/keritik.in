@@ -191,3 +191,61 @@ footer{
     text-align:center;
     padding:30px;
 }
+
+/* MOBILE */
+
+@media (max-width: 768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+
+    .menu{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+    }
+
+    .logo{
+        font-size:32px;
+    }
+
+    header{
+        padding:50px 20px;
+    }
+
+    header h1{
+        font-size:3rem;
+    }
+
+    .hero-buttons{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+        align-items:center;
+    }
+
+    .btn,
+    .btn-outline{
+        width:250px;
+        text-align:center;
+        margin:0;
+    }
+
+    .stats .container,
+    .feature-grid,
+    .latest-grid{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .card,
+    .feature-card,
+    .latest-card{
+        width:100%;
+        max-width:350px;
+    }
+
+}
