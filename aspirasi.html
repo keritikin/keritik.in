@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aspirasi Publik | Keritik.in</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.page{
+    max-width:1000px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.kritik{
+    background:#ffebee;
+}
+
+.saran{
+    background:#e8f5e9;
+}
+
+.apresiasi{
+    background:#e3f2fd;
+}
+
+.meta{
+    color:#666;
+    font-size:14px;
+    margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+<h1>📖 Aspirasi Publik</h1>
+
+<div id="aspirasiList">
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCRdkMGgb1s5n90FwMmDSL9WyHWPJeOMJ0",
+  authDomain: "keritik-in.firebaseapp.com",
+  projectId: "keritik-in",
+  storageBucket: "keritik-in.firebasestorage.app",
+  messagingSenderId: "428678412439",
+  appId: "1:428678412439:web:3daaf22b775b9b00a191d2",
+  measurementId: "G-E04Y0KK0WM"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const snapshot =
+await getDocs(collection(db, "aspirasi"));
+
+const list =
+document.getElementById("aspirasiList");
+
+snapshot.forEach((doc) => {
+
+const data = doc.data();
+
+list.innerHTML += `
+
+<div class="card">
+
+<div class="badge ${data.kategori.toLowerCase()}">
+${data.kategori}
+</div>
+
+<h2>${data.judul}</h2>
+
+<p>${data.isi}</p>
+
+<div class="meta">
+
+👤 ${data.username}
+
+<br>
+
+📍 ${data.kabupaten || "-"},
+${data.provinsi || "-"}
+
+<br>
+
+🏷️ ${data.topik || "-"}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+</script>
+  
+</body>
+</html>
