@@ -6,7 +6,9 @@ from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import {
 getFirestore,
 collection,
-getDocs
+getDocs,
+query,
+where
 }
 from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
@@ -23,8 +25,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const snapshot =
-await getDocs(collection(db, "aspirasi"));
+const q = query(
+    collection(db, "aspirasi"),
+    where("status", "==", "published")
+);
+
+const snapshot = await getDocs(q);
 
 let total = 0;
 let kritik = 0;
