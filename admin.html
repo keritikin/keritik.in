@@ -37,6 +37,10 @@ button{
 
 <h1>🔐 Admin Keritik.in</h1>
 
+<button id="logoutBtn">
+    Logout
+</button>
+    
 <div id="listAspirasi"></div>
 
 <script type="module">
@@ -51,6 +55,12 @@ import {
   updateDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCRdkMGgb1s5n90FwMmDSL9WyHWPJeOMJ0",
   authDomain: "keritik-in.firebaseapp.com",
@@ -63,6 +73,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user)=>{
+    if(!user){
+        window.location.href = "login.html";
+    }
+});
+    
 const list =
 document.getElementById("listAspirasi");
 
@@ -117,6 +135,17 @@ async function(id){
 
 }
 
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async()=>{
+
+    await signOut(auth);
+
+    window.location.href =
+    "login.html";
+
+});
+    
 </script>
   
 </body>
