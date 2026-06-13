@@ -90,18 +90,18 @@ textarea{
 
         <div class="form-group">
             <label>Nama Pengguna (Opsional)</label>
-            <input type="text" placeholder="Contoh: rakyatbiasa">
+            <input id="username" type="text" placeholder="Contoh: rakyatbiasa">
         </div>
 
         <div class="form-group">
     <label>Provinsi</label>
 
     <input
-        list="provinsi"
-        name="provinsi"
+        id="provinsi"
+        list="daftarProvinsi"
         placeholder="Pilih atau ketik provinsi">
 
-    <datalist id="provinsi">
+    <datalist id="daftarProvinsi">
         <option value="Aceh">
         <option value="Sumatera Utara">
         <option value="Sumatera Barat">
@@ -153,6 +153,7 @@ textarea{
     <label>Kabupaten / Kota (Opsional)</label>
 
     <input
+        id="kabupaten"
         type="text"
         placeholder="Contoh: Medan, Bandung, Jayapura">
 </div>
@@ -160,7 +161,7 @@ textarea{
         <div class="form-group">
             <label>Kategori</label>
 
-            <select>
+            <select id="kategori">
                 <option>Kritik</option>
                 <option>Saran</option>
                 <option>Apresiasi</option>
@@ -170,7 +171,7 @@ textarea{
         <div class="form-group">
     <label>Topik Aspirasi</label>
 
-    <select>
+    <select id="topik">
         <option>Pendidikan</option>
         <option>Kesehatan</option>
         <option>Transportasi</option>
@@ -185,21 +186,88 @@ textarea{
         
         <div class="form-group">
             <label>Judul Aspirasi</label>
-            <input type="text">
+            <input id="judul" type="text">
         </div>
 
         <div class="form-group">
             <label>Isi Aspirasi</label>
-            <textarea></textarea>
+            <textarea id="isi"></textarea>
         </div>
 
-        <button class="submit-btn">
+        <button type="submit" class="submit-btn">
             Kirim Aspirasi
         </button>
 
     </form>
 
+<script type="module">
+
+// Firebase Code
+
+</script>
+
 </div>
 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCRdkMGgb1s5n90FwMmDSL9WyHWPJeOMJ0",
+  authDomain: "keritik-in.firebaseapp.com",
+  projectId: "keritik-in",
+  storageBucket: "keritik-in.firebasestorage.app",
+  messagingSenderId: "428678412439",
+  appId: "1:428678412439:web:3daaf22b775b9b00a191d2",
+  measurementId: "G-E04Y0KK0WM"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document
+.getElementById("aspirasiForm")
+.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  try {
+
+    await addDoc(
+      collection(db, "aspirasi"),
+      {
+        username: document.getElementById("username").value || "Anonim",
+        provinsi: document.getElementById("provinsi").value,
+        kabupaten: document.getElementById("kabupaten").value,
+        kategori: document.getElementById("kategori").value,
+        topik: document.getElementById("topik").value,
+        judul: document.getElementById("judul").value,
+        isi: document.getElementById("isi").value,
+        status: "pending",
+        createdAt: serverTimestamp()
+      }
+    );
+
+    alert("🎉 Aspirasi berhasil dikirim!");
+
+    document.getElementById("aspirasiForm").reset();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("❌ Gagal mengirim aspirasi");
+
+  }
+
+});
+</script>
+    
 </body>
 </html>
