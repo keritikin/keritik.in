@@ -52,40 +52,44 @@ document.getElementById("totalApresiasi").textContent = apresiasi;
 
 const latestContainer = document.getElementById("latestAspirasi");
 
-let aspirasiTerbaru = [];
+if(latestContainer){
 
-snapshot.forEach((doc)=>{
+    let aspirasiTerbaru = [];
 
-    const data = doc.data();
+    snapshot.forEach((doc)=>{
 
-    if(data.status === "published"){
-        aspirasiTerbaru.push(data);
-    }
+        const data = doc.data();
 
-});
+        if(data.status === "published"){
+            aspirasiTerbaru.push(data);
+        }
 
-aspirasiTerbaru
-.slice(0,3)
-.forEach((data)=>{
+    });
 
-    latestContainer.innerHTML += `
+    aspirasiTerbaru
+    .slice(0,3)
+    .forEach((data)=>{
 
-    <div class="latest-card">
+        latestContainer.innerHTML += `
 
-        <div class="badge">
-            ${data.kategori}
+        <div class="latest-card">
+
+            <div class="badge">
+                ${data.kategori}
+            </div>
+
+            <h3>
+                ${data.judul}
+            </h3>
+
+            <p>
+                ${data.isi.substring(0,120)}...
+            </p>
+
         </div>
 
-        <h3>
-            ${data.judul}
-        </h3>
+        `;
 
-        <p>
-            ${data.isi.substring(0,120)}...
-        </p>
+    });
 
-    </div>
-
-    `;
-
-});
+}
