@@ -72,6 +72,32 @@ header p{
     flex-wrap:wrap;
     justify-content:center;
 }
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    max-width:1200px;
+    margin:auto;
+
+    padding:20px;
+}
+
+.menu{
+    display:flex;
+    gap:15px;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.menu a:hover{
+    opacity:.8;
+}
+
 
 .card{
     background:white;
