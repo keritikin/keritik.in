@@ -117,9 +117,9 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 
 import {
-getFirestore,
-collection,
-getDocs
+    getFirestore,
+    collection,
+    getDocs
 }
 from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
@@ -134,32 +134,32 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
 
-const snapshot =
-await getDocs(collection(db, "aspirasi"));
+const snapshot = await getDocs(collection(db, "aspirasi"));
 
 let semuaAspirasi = [];
 
 snapshot.forEach((doc) => {
-
     const data = doc.data();
 
     if (data.status === "published") {
         semuaAspirasi.push(data);
     }
-
 });
 
 tampilkanAspirasi(semuaAspirasi);
 
-    function tampilkanAspirasi(dataAspirasi){
+function tampilkanAspirasi(dataAspirasi){
 
-    const list =
-    document.getElementById("aspirasiList");
+    const list = document.getElementById("aspirasiList");
 
     list.innerHTML = "";
+
+    if(dataAspirasi.length === 0){
+        list.innerHTML = "<p>Belum ada aspirasi yang dipublikasikan.</p>";
+        return;
+    }
 
     dataAspirasi.forEach((data)=>{
 
@@ -176,22 +176,13 @@ tampilkanAspirasi(semuaAspirasi);
             <p>${data.isi}</p>
 
             <div class="meta">
-
                 👤 ${data.username}
-
                 <br>
-
-                📍 ${data.kabupaten || "-"},
-                ${data.provinsi || "-"}
-
+                📍 ${data.kabupaten || "-"}, ${data.provinsi || "-"}
                 <br>
-
                 🏷️ ${data.topik || "-"}
-
                 <br>
-
                 📅 ${data.tanggal || "-"}
-
             </div>
 
         </div>
@@ -202,67 +193,24 @@ tampilkanAspirasi(semuaAspirasi);
 
 }
 
-const data = doc.data();
-
-list.innerHTML += `
-
-<div class="card">
-
-<div class="badge ${data.kategori.toLowerCase()}">
-${data.kategori}
-</div>
-
-<h2>${data.judul}</h2>
-
-<p>${data.isi}</p>
-
-<div class="meta">
-
-👤 ${data.username}
-
-<br>
-
-📍 ${data.kabupaten || "-"},
-${data.provinsi || "-"}
-
-<br>
-
-🏷️ ${data.topik || "-"}
-
-<br>
-
-📅 ${data.tanggal || "-"}
-
-</div>
-
-</div>
-
-`;
-
-});
-
-    document
+document
 .getElementById("searchInput")
 .addEventListener("input", (e)=>{
 
-    const keyword =
-    e.target.value.toLowerCase();
+    const keyword = e.target.value.toLowerCase();
 
-    const hasil =
-    semuaAspirasi.filter(item =>
-
+    const hasil = semuaAspirasi.filter(item =>
         item.judul?.toLowerCase().includes(keyword) ||
-
         item.isi?.toLowerCase().includes(keyword) ||
-
-        item.topik?.toLowerCase().includes(keyword)
-
+        item.topik?.toLowerCase().includes(keyword) ||
+        item.kategori?.toLowerCase().includes(keyword) ||
+        item.provinsi?.toLowerCase().includes(keyword)
     );
 
     tampilkanAspirasi(hasil);
 
 });
-    
+
 </script>
   
 </body>
