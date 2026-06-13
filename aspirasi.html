@@ -81,6 +81,28 @@
     margin-top:10px;
 }
 
+.filter-box{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.filter-btn{
+    border:none;
+    padding:10px 18px;
+    border-radius:20px;
+    background:white;
+    cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.filter-btn.active{
+    background:#c62828;
+    color:white;
+}
+
 </style>
 
 </head>
@@ -228,6 +250,41 @@ document
     );
 
     tampilkanAspirasi(hasil);
+
+});
+
+const filterButtons =
+document.querySelectorAll(".filter-btn");
+
+filterButtons.forEach((button)=>{
+
+    button.addEventListener("click", ()=>{
+
+        filterButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        const filter =
+        button.dataset.filter;
+
+        if(filter === "Semua"){
+
+            tampilkanAspirasi(semuaAspirasi);
+
+        }else{
+
+            const hasil =
+            semuaAspirasi.filter(item =>
+                item.kategori === filter
+            );
+
+            tampilkanAspirasi(hasil);
+
+        }
+
+    });
 
 });
 
