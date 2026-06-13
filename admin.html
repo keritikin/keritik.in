@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Keritik.in</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.approve{
+    background:green;
+    color:white;
+}
+</style>
+
+</head>
+<body>
+
+<h1>🔐 Admin Keritik.in</h1>
+
+<div id="listAspirasi"></div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCRdkMGgb1s5n90FwMmDSL9WyHWPJeOMJ0",
+  authDomain: "keritik-in.firebaseapp.com",
+  projectId: "keritik-in",
+  storageBucket: "keritik-in.firebasestorage.app",
+  messagingSenderId: "428678412439",
+  appId: "1:428678412439:web:3daaf22b775b9b00a191d2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const list =
+document.getElementById("listAspirasi");
+
+const snapshot =
+await getDocs(collection(db,"aspirasi"));
+
+snapshot.forEach((item)=>{
+
+    const data = item.data();
+
+    if(data.status !== "pending") return;
+
+    list.innerHTML += `
+    
+    <div class="card">
+
+        <h3>${data.judul}</h3>
+
+        <p>${data.isi}</p>
+
+        <p>
+            👤 ${data.username}
+        </p>
+
+        <button
+            class="approve"
+            onclick="approveAspirasi('${item.id}')">
+
+            Publish
+
+        </button>
+
+    </div>
+
+    `;
+
+});
+
+window.approveAspirasi =
+async function(id){
+
+    await updateDoc(
+        doc(db,"aspirasi",id),
+        {
+            status:"published"
+        }
+    );
+
+    alert("✅ Aspirasi dipublikasikan");
+
+    location.reload();
+
+}
+
+</script>
+  
+</body>
+</html>
