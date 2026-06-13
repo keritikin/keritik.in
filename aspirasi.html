@@ -16,6 +16,16 @@
     padding:20px;
 }
 
+.hero{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.hero p{
+    color:#666;
+    margin-top:10px;
+}
+    
 #aspirasiList{
     display:flex;
     flex-direction:column;
@@ -67,14 +77,19 @@
 
 <div class="page">
 
-<h1>📖 Aspirasi Publik</h1>
+<div class="hero">
+    <h1>📖 Aspirasi Publik</h1>
+    <p>
+        Kumpulan kritik, saran, dan apresiasi dari masyarakat Indonesia.
+    </p>
+</div>
 
 <div id="aspirasiList">
 
 </div>
 
 </div>
-
+    
 <script type="module">
 
 import { initializeApp }
@@ -135,6 +150,10 @@ ${data.provinsi || "-"}
 <br>
 
 🏷️ ${data.topik || "-"}
+
+<br>
+
+📅 ${data.tanggal || "-"}
 
 </div>
 
