@@ -36,12 +36,53 @@ button{
     background:green;
     color:white;
 }
+
+.dashboard{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    margin:30px 0;
+}
+
+.stat-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    min-width:180px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+.stat-card h2{
+    color:#c62828;
+    margin-bottom:10px;
+}
+
 </style>
 
 </head>
 <body>
 
 <h1>🔐 Admin Keritik.in</h1>
+
+<div class="dashboard">
+
+    <div class="stat-card">
+        <h2 id="totalAspirasi">0</h2>
+        <p>Total Aspirasi</p>
+    </div>
+
+    <div class="stat-card">
+        <h2 id="pendingAspirasi">0</h2>
+        <p>Pending</p>
+    </div>
+
+    <div class="stat-card">
+        <h2 id="publishedAspirasi">0</h2>
+        <p>Published</p>
+    </div>
+
+</div>
 
 <button id="logoutBtn">
     Logout
@@ -95,12 +136,27 @@ const q = query(
     where("status", "==", "published")
 );
 
-const snapshot = await getDocs(q);
+const snapshot =
+await getDocs(collection(db,"aspirasi"));
+
+let total = 0;
+let pending = 0;
+let published = 0;
 
 snapshot.forEach((item)=>{
 
     const data = item.data();
 
+    total++;
+
+    if(data.status === "pending"){
+        pending++;
+    }
+    
+    if(data.status === "published"){
+        published++;
+    }
+    
     if(data.status !== "pending") return;
 
     list.innerHTML += `
@@ -129,6 +185,15 @@ snapshot.forEach((item)=>{
 
 });
 
+document.getElementById("totalAspirasi")
+.textContent = total;
+
+document.getElementById("pendingAspirasi")
+.textContent = pending;
+
+document.getElementById("publishedAspirasi")
+.textContent = published;
+    
 window.approveAspirasi =
 async function(id){
 
