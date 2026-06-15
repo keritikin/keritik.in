@@ -376,3 +376,111 @@ footer{
         width:140px;
     }
 }
+
+/* DARK MODE */
+
+.theme-toggle{
+    border:none;
+    background:white;
+    color:#c62828;
+    padding:8px 12px;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+body.dark-mode{
+    background:#121212;
+    color:#f5f5f5;
+}
+
+body.dark-mode .about,
+body.dark-mode .stats,
+body.dark-mode .latest,
+body.dark-mode .features{
+    background:#121212;
+}
+
+body.dark-mode .card,
+body.dark-mode .latest-card,
+body.dark-mode .feature-card,
+body.dark-mode .aspirasi-card,
+body.dark-mode .about-card,
+body.dark-mode .form-container,
+body.dark-mode .stat-card{
+    background:#1e1e1e;
+    color:#f5f5f5;
+    box-shadow:0 4px 20px rgba(0,0,0,.35);
+}
+
+body.dark-mode .latest-card p,
+body.dark-mode .feature-card p,
+body.dark-mode .about-card p,
+body.dark-mode .about-card li,
+body.dark-mode .meta,
+body.dark-mode .latest-subtitle,
+body.dark-mode .page-hero p,
+body.dark-mode .hero-about p{
+    color:#cfcfcf;
+}
+
+body.dark-mode .page-navbar{
+    background:#121212;
+}
+
+body.dark-mode .page-menu a{
+    color:#f5f5f5;
+}
+
+body.dark-mode .page-menu a:hover{
+    color:#ff5252;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea{
+    background:#1e1e1e;
+    color:#f5f5f5;
+    border:1px solid #444;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder{
+    color:#aaa;
+}
+
+body.dark-mode .search-box input{
+    background:#1e1e1e;
+    color:#f5f5f5;
+    border:1px solid #444;
+}
+
+body.dark-mode .filter-btn{
+    background:#1e1e1e;
+    color:#f5f5f5;
+}
+
+body.dark-mode .filter-btn.active{
+    background:#c62828;
+    color:white;
+}
+
+body.dark-mode .badge{
+    color:#222;
+}
+
+body.dark-mode .notice{
+    background:#332b13;
+    color:#ffe9a6;
+}
+
+body.dark-mode footer{
+    background:#121212;
+    color:#ccc;
+}
+
+body.dark-mode .theme-toggle{
+    background:#c62828;
+    color:white;
+}
