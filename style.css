@@ -307,6 +307,23 @@ footer{
     color:#c62828;
 }
 
+.support-link{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:10px 18px;
+    background:#c62828;
+    color:white;
+    text-decoration:none;
+    border-radius:25px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.support-link:hover{
+    opacity:.85;
+    transform:translateY(-2px);
+}
+
 /* MOBILE */
 
 @media (max-width:768px){
@@ -480,5 +497,10 @@ body.dark-mode footer{
 
 body.dark-mode .theme-toggle{
     background:#c62828;
+    color:white;
+}
+
+body.dark-mode .support-link{
+    background:#ff5252;
     color:white;
 }
