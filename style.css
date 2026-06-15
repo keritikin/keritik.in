@@ -7,7 +7,35 @@
 body{
     font-family:Arial, sans-serif;
     background:#f5f5f5;
+    color:#222;.page-navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.page-logo img{
+    width:120px;
+    height:auto;
+}
+
+.page-menu{
+    display:flex;
+    gap:20px;
+}
+
+.page-menu a{
     color:#222;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.page-menu a:hover{
+    color:#c62828;
+}
 }
 
 .container{
@@ -251,6 +279,36 @@ footer{
     padding:30px;
 }
 
+.page-navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.page-logo img{
+    width:120px;
+    height:auto;
+}
+
+.page-menu{
+    display:flex;
+    gap:20px;
+}
+
+.page-menu a{
+    color:#222;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.page-menu a:hover{
+    color:#c62828;
+}
+
 /* MOBILE */
 
 @media (max-width:768px){
@@ -299,5 +357,22 @@ footer{
     .latest-card{
         width:100%;
         max-width:350px;
+    }
+
+        /* Navbar untuk halaman biasa seperti tentang.html */
+    .page-navbar{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .page-menu{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:12px;
+    }
+
+    .page-logo img{
+        width:140px;
     }
 }
