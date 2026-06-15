@@ -7,12 +7,8 @@
 body{
     font-family:Arial, sans-serif;
     background:#f5f5f5;
+    color:#222;
     display:block;
-    color:#222;.page-navbar{
-
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
 }
 
 .page-logo img{
@@ -278,13 +274,16 @@ footer{
 }
 
 .page-navbar{
+    width:90%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:20px 0;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
+    position:relative;
 }
 
 .page-logo img{
@@ -294,6 +293,7 @@ footer{
 
 .page-menu{
     display:flex;
+    align-items:center;
     gap:20px;
 }
 
