@@ -156,6 +156,21 @@ content="https://keritikin.github.io/logo.png">
     margin-top:15px;
 }
 
+.dukung-btn{
+    margin-top:18px;
+    padding:10px 16px;
+    border:none;
+    border-radius:20px;
+    background:#c62828;
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.dukung-btn:hover{
+    opacity:.9;
+}
+
 </style>
 
 </head>
@@ -234,7 +249,10 @@ import {
     collection,
     getDocs,
     query,
-    where
+    where,
+    doc,
+    updateDoc,
+    increment
 }
 from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
@@ -263,10 +281,12 @@ let semuaAspirasi = [];
 snapshot.forEach((doc) => {
     const data = doc.data();
 
-    if (data.status === "published") {
-        semuaAspirasi.push(data);
-    }
-});
+if (data.status === "published") {
+    semuaAspirasi.push({
+        id: doc.id,
+        ...data
+    });
+}
 
 tampilkanAspirasi(semuaAspirasi);
 
@@ -304,6 +324,10 @@ function tampilkanAspirasi(dataAspirasi){
                 <br>
                 📅 ${data.tanggal || "-"}
             </div>
+
+            <button class="dukung-btn" onclick="dukungAspirasi('${data.id}')">
+                ❤️ Dukung ${data.dukungan || 0}
+            </button>
 
         </div>
 
@@ -365,6 +389,42 @@ filterButtons.forEach((button)=>{
     });
 
 });
+
+window.dukungAspirasi =
+async function(id){
+
+    const sudahDukung =
+    localStorage.getItem("dukung_" + id);
+
+    if(sudahDukung){
+        alert("Kamu sudah mendukung aspirasi ini.");
+        return;
+    }
+
+    try{
+
+        await updateDoc(
+            doc(db, "aspirasi", id),
+            {
+                dukungan: increment(1)
+            }
+        );
+
+        localStorage.setItem("dukung_" + id, "true");
+
+        alert("Terima kasih sudah mendukung aspirasi ini ❤️");
+
+        location.reload();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Gagal memberi dukungan.");
+
+    }
+
+}
 
 </script>
 
