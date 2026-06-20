@@ -130,10 +130,6 @@ onAuthStateChanged(auth, (user)=>{
     
 const list =
 document.getElementById("listAspirasi");
-const q = query(
-    collection(db, "aspirasi"),
-    where("status", "==", "published")
-);
 
 const snapshot =
 await getDocs(collection(db,"aspirasi"));
